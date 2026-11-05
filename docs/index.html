@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SciPlot 科学数据分析与绘图 · 下载</title>
+<meta name="description" content="SciPlot —— 面向化学与生物学的科学数据分析与绘图软件。支持数据工作表、专业科学作图、统计分析、曲线拟合与酶动力学等。">
+<style>
+  :root {
+    --bg: #f2f3f5;
+    --panel: #ffffff;
+    --panel-alt: #fafbfc;
+    --border: #d5d9de;
+    --border-dark: #c2c7cd;
+    --text: #1c2733;
+    --text-dim: #5b6672;
+    --text-faint: #8a939c;
+    --accent: #2b6cb0;
+    --accent-dark: #1f4e7a;
+    --accent-light: #e3edf7;
+    --orange: #e08a1e;
+    --green: #3a7d44;
+    --red: #d64541;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
 
+  /* 顶部导航 */
+  .nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; padding: 12px 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
+  .nav .ver {
+    font-size: 12px; color: var(--accent); background: var(--accent-light);
+    padding: 2px 8px; border-radius: 10px; font-weight: 600;
+  }
+  .nav .links { margin-left: auto; display: flex; gap: 22px; font-size: 14px; }
+  .nav .links a { color: var(--text-dim); }
+  .nav .links a:hover { color: var(--accent); }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Logo */
+  .logo { width: 34px; height: 34px; flex-shrink: 0; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 72px 24px 48px; }
+  .hero .logo-lg { width: 84px; height: 84px; margin: 0 auto 22px; display: block; }
+  .hero h1 { font-size: 40px; font-weight: 700; letter-spacing: 1px; }
+  .hero h1 .hl { color: var(--accent); }
+  .hero .sub { font-size: 18px; color: var(--text-dim); margin-top: 12px; }
+  .hero .meta { margin-top: 20px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .hero .meta span {
+    font-size: 13px; color: var(--text-dim); background: #fff;
+    border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px;
+  }
+  .hero .cta { margin-top: 34px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 30px; border-radius: 6px; font-size: 16px; font-weight: 600;
+    border: 1px solid transparent; cursor: pointer; transition: all .15s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-ghost { background: #fff; color: var(--accent); border-color: var(--border-dark); }
+  .btn-ghost:hover { border-color: var(--accent); background: var(--accent-light); }
+  .btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* 特性 */
+  .section { padding: 26px 0; }
+  .section-title { text-align: center; font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .section-desc { text-align: center; color: var(--text-dim); margin-bottom: 34px; font-size: 15px; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .feature {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 24px 22px; transition: all .15s;
+  }
+  .feature:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+  .feature .ico {
+    width: 42px; height: 42px; border-radius: 8px; background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+  }
+  .feature .ico svg { width: 24px; height: 24px; fill: var(--accent); }
+  .feature h3 { font-size: 16px; margin-bottom: 8px; }
+  .feature p { font-size: 13.5px; color: var(--text-dim); }
+
+  /* 截图 */
+  .shot {
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  }
+  .shot img { width: 100%; display: block; }
+  .shot .cap { padding: 12px 18px; font-size: 13px; color: var(--text-faint); border-top: 1px solid var(--border); }
+
+  /* 下载区 */
+  .downloads { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dl-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    padding: 28px 26px; display: flex; flex-direction: column;
+  }
+  .dl-card .os { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .dl-card .os svg { width: 34px; height: 34px; }
+  .dl-card h3 { font-size: 20px; }
+  .dl-card .arch { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .dl-card .spec { margin: 16px 0; font-size: 13.5px; color: var(--text-dim); }
+  .dl-card .spec li { list-style: none; padding: 4px 0; display: flex; gap: 8px; }
+  .dl-card .spec li b { color: var(--text); font-weight: 600; min-width: 88px; }
+  .dl-card .dl-btn { margin-top: auto; }
+  .dl-card .dl-btn .btn { width: 100%; justify-content: center; }
+  .dl-card .dl-btn .btn + .btn { margin-top: 10px; }
+  .btn .tag {
+    font-size: 11px; line-height: 1; font-weight: 700;
+    padding: 3px 8px; border-radius: 9px; margin-left: 8px;
+    background: rgba(255,255,255,.28); color: #fff;
+  }
+  .btn-primary .tag { background: var(--orange); }
+  .dl-route-hint { font-size: 12px; color: var(--text-faint); margin-top: 12px; text-align: center; line-height: 1.6; }
+  .dl-route-hint a { color: var(--accent); }
+  .dl-note { font-size: 12.5px; color: var(--text-faint); margin-top: 12px; text-align: center; }
+
+  /* 安装说明 */
+  .steps { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 30px 28px; }
+  .steps h3 { font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .steps ol { padding-left: 22px; }
+  .steps li { margin-bottom: 10px; font-size: 14.5px; color: var(--text-dim); }
+  .steps code {
+    background: var(--panel-alt); border: 1px solid var(--border);
+    padding: 2px 8px; border-radius: 4px; font-family: Consolas, "Courier New", monospace;
+    font-size: 13px; color: var(--accent-dark);
+  }
+  .steps .warn {
+    background: #fdf3e7; border: 1px solid #f0d9b5; border-radius: 6px;
+    padding: 10px 14px; font-size: 13px; color: #8a5a00; margin-top: 12px;
+  }
+
+  /* 页脚 */
+  .footer { text-align: center; padding: 40px 24px 48px; color: var(--text-faint); font-size: 13px; }
+  .footer a { color: var(--text-dim); }
+  .footer .divider { margin: 0 10px; color: var(--border); }
+
+  @media (max-width: 760px) {
+    .features { grid-template-columns: 1fr; }
+    .downloads { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 30px; }
+    .nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="logo">
+      <svg viewBox="0 0 128 128"><rect x="0" y="0" width="128" height="128" rx="20" fill="#2b6cb0"/><polyline points="22,88 50,58 72,72 96,40" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="88" r="7" fill="#e08a1e"/><circle cx="50" cy="58" r="7" fill="#e08a1e"/><circle cx="72" cy="72" r="7" fill="#e08a1e"/><circle cx="96" cy="40" r="7" fill="#e08a1e"/><line x1="22" y1="96" x2="22" y2="24" stroke="rgba(255,255,255,.55)" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="96" x2="110" y2="96" stroke="rgba(255,255,255,.55)" stroke-width="4" stroke-linecap="round"/></svg>
+    </span>
+    <span class="brand">SciPlot <span class="ver">v1.0.0</span></span>
+    <span class="links">
+      <a href="#features">功能</a>
+      <a href="#screenshot">截图</a>
+      <a href="#download">下载</a>
+      <a href="#install">安装</a>
+    </span>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <svg class="logo-lg" viewBox="0 0 128 128"><rect x="0" y="0" width="128" height="128" rx="20" fill="#2b6cb0"/><polyline points="22,88 50,58 72,72 96,40" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="88" r="7" fill="#e08a1e"/><circle cx="50" cy="58" r="7" fill="#e08a1e"/><circle cx="72" cy="72" r="7" fill="#e08a1e"/><circle cx="96" cy="40" r="7" fill="#e08a1e"/><line x1="22" y1="96" x2="22" y2="24" stroke="rgba(255,255,255,.55)" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="96" x2="110" y2="96" stroke="rgba(255,255,255,.55)" stroke-width="4" stroke-linecap="round"/></svg>
+  <h1>SciPlot <span class="hl">科学数据分析与绘图</span></h1>
+  <p class="sub">面向化学与生物学实验数据处理的桌面软件，替代 Origin 的轻量方案。</p>
+  <div class="meta">
+    <span>版本 1.0.0</span>
+    <span>完全离线可用</span>
+    <span>中文界面</span>
+    <span>免费使用</span>
+  </div>
+  <div class="cta">
+    <a class="btn btn-primary" href="#download">
+      <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 3h14v2H5v-2z"/></svg>
+      立即下载
+    </a>
+    <a class="btn btn-ghost" href="#features">了解功能</a>
+  </div>
+</header>
+
+<!-- 功能特性 -->
+<div class="container section" id="features">
+  <h2 class="section-title">核心功能</h2>
+  <p class="section-desc">从原始数据到可发表的图表，一站式完成</p>
+  <div class="features">
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v2H8V8zm0 4h8v2H8v-2zm0 4h5v2H8v-2z"/></svg></div>
+      <h3>数据工作表</h3>
+      <p>多列数据管理，CSV / TXT / Excel 一键导入，列类型设置（X / Y / 误差 / 标签），排序、序列填充、转置。</p>
+    </div>
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm3 10l3-6 3 4 2-3 3 5H8z"/></svg></div>
+      <h3>专业科学作图</h3>
+      <p>折线 / 散点 / 柱状 / 箱线 / 直方图 / 饼图等，多曲线叠加、误差棒、对数轴，导出 PNG / SVG / PDF 高清图。</p>
+    </div>
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10h4v10H4zm6 0V4h4v16h-4zm6 0v-7h4v7h-4z"/></svg></div>
+      <h3>统计分析</h3>
+      <p>描述性统计、t 检验、单因素方差分析（含 Tukey 事后检验）、相关分析、正态性检验。</p>
+    </div>
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 17c2 1 4 1 6 0s4-1 6 0 4 1 6 0V5c-2-1-4-1-6 0s-4 1-6 0-4-1-6 0v12z"/></svg></div>
+      <h3>曲线拟合</h3>
+      <p>线性 / 多项式 / 指数 / 对数 / 高斯 / Sigmoid / 米氏方程，输出参数、标准误、R²、RMSE。</p>
+    </div>
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.8 7.1 17.2 8 11.7 4 7.8l5.5-.8L12 2zm0 3.5l-1.3 2.6-2.9.4 2.1 2-.5 2.9 2.6-1.4 2.6 1.4-.5-2.9 2.1-2-2.9-.4L12 5.5z"/></svg></div>
+      <h3>化学 / 生物专用</h3>
+      <p>酶动力学 Km/Vmax、标准曲线与浓度反算、IC50/EC50、峰分析（寻峰 / 面积 / 半峰宽）。</p>
+    </div>
+    <div class="feature">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2zM8 2h8v2H8V2z"/></svg></div>
+      <h3>跨平台 &amp; 离线</h3>
+      <p>Windows 与 macOS 双平台，内置完整科学计算栈，无需联网、无需安装 Python 环境。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 截图 -->
+<div class="container section" id="screenshot">
+  <h2 class="section-title">界面预览</h2>
+  <p class="section-desc">左侧数据表 · 右侧交互式图形，经典学术软件布局</p>
+  <div class="shot">
+    <img src="screenshot.png" alt="SciPlot 软件界面截图">
+    <div class="cap">SciPlot 主界面：数据工作表与米氏酶动力学拟合曲线</div>
+  </div>
+</div>
+
+<!-- 下载 -->
+<div class="container section" id="download">
+  <h2 class="section-title">下载安装</h2>
+  <p class="section-desc">选择你的操作系统</p>
+  <div class="downloads">
+    <!-- Windows -->
+    <div class="dl-card">
+      <div class="os">
+        <svg viewBox="0 0 24 24" fill="#2b6cb0"><path d="M3 5.5l7.5-1v7H3v-6zm0 7h7.5v7L3 18.5v-6zm8.5-8.1L21 3v8h-9.5V4.4zm0 8H21v8l-9.5-1.4v-6.6z"/></svg>
+        <div>
+          <h3>Windows</h3>
+          <div class="arch">Windows 10 / 11 · 64 位</div>
+        </div>
+      </div>
+      <ul class="spec">
+        <li><b>文件名</b>SciPlot-Setup-1.0.0.exe</li>
+        <li><b>大小</b>315 MB</li>
+        <li><b>类型</b>安装程序（含卸载）</li>
+      </ul>
+      <div class="dl-btn">
+        <a class="btn btn-primary" href="https://ghfast.top/https://github.com/biolmz/SciPlot/releases/download/v1.0.0/SciPlot-Setup-1.0.0.exe">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 3h14v2H5v-2z"/></svg>
+          加速下载<span class="tag">推荐</span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/biolmz/SciPlot/releases/download/v1.0.0/SciPlot-Setup-1.0.0.exe">
+          官方原始下载
+        </a>
+      </div>
+      <div class="dl-route-hint">加速线路经 ghfast.top 中转，速度更快；原始线路直接指向 GitHub Release。</div>
+    </div>
+    <!-- macOS -->
+    <div class="dl-card">
+      <div class="os">
+        <svg viewBox="0 0 24 24" fill="#1c2733"><path d="M16.5 3c.2 1.2-.3 2.4-1.3 3.2-.9.7-2.3 1.1-3.5.8-.2-1.2.4-2.4 1.3-3.2.8-.7 2.2-1.1 3.5-.8zM19 16.5c-.5 1.2-.8 1.8-1.5 2.9-.9 1.5-2.3 3.4-4 3.4-1.5 0-1.9-1-3.5-1-1.7 0-2.1 1-3.6 1-1.7 0-2.9-1.7-3.9-3.3-1.6-2.6-2.7-6.4-1.1-9.2 1-1.8 2.8-3 4.7-3 1.5 0 2.5 1 3.8 1 1.3 0 2.1-1 3.8-1 1.6 0 3.2.9 4.3 2.4-1.9 1-3.1 2.8-3 4.8z"/></svg>
+        <div>
+          <h3>macOS</h3>
+          <div class="arch">Apple Silicon（M1/M2/M3/M4）</div>
+        </div>
+      </div>
+      <ul class="spec">
+        <li><b>文件名</b>SciPlot-macOS-arm64.dmg</li>
+        <li><b>大小</b>95 MB</li>
+        <li><b>类型</b>磁盘映像（拖入应用程序）</li>
+      </ul>
+      <div class="dl-btn">
+        <a class="btn btn-primary" href="https://ghfast.top/https://github.com/biolmz/SciPlot/releases/download/v1.0.0/SciPlot-macOS-arm64.dmg">
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 3h14v2H5v-2z"/></svg>
+          加速下载<span class="tag">推荐</span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/biolmz/SciPlot/releases/download/v1.0.0/SciPlot-macOS-arm64.dmg">
+          官方原始下载
+        </a>
+      </div>
+      <div class="dl-route-hint">加速线路经 ghfast.top 中转，速度更快；原始线路直接指向 GitHub Release。</div>
+      <div class="dl-note">Intel Mac（2020 年前）请访问源码仓库自行打包</div>
+    </div>
+  </div>
+</div>
+
+<!-- 安装说明 -->
+<div class="container section" id="install">
+  <h2 class="section-title">安装说明</h2>
+  <p class="section-desc">几步即可开始使用</p>
+  <div class="steps">
+    <h3>Windows</h3>
+    <ol>
+      <li>双击下载的 <code>SciPlot-Setup-1.0.0.exe</code>，按中文安装向导完成安装；</li>
+      <li>桌面或开始菜单找到「SciPlot 科学数据分析与绘图」启动；</li>
+      <li>导入数据（CSV / TXT / Excel），即可开始绘图与分析。</li>
+    </ol>
+    <h3 style="margin-top:24px;">macOS</h3>
+    <ol>
+      <li>双击 <code>SciPlot-macOS-arm64.dmg</code> 挂载，把 <code>SciPlot</code> 拖入「应用程序」；</li>
+      <li>首次打开若提示「无法验证开发者」，在终端执行一次：
+        <br><code>xattr -cr /Applications/SciPlot.app</code>
+      </li>
+      <li>之后正常双击打开。</li>
+    </ol>
+    <div class="warn">
+      说明：macOS 版为未签名构建，系统安全策略（Gatekeeper）会拦截首次运行，上述
+      <code>xattr</code> 命令可解除限制，属正常现象。
+    </div>
+  </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  SciPlot 科学数据分析与绘图 · v1.0.0
+  <span class="divider">|</span>
+  <a href="#download">下载</a>
+  <span class="divider">|</span>
+  <a href="https://github.com/biolmz/SciPlot" target="_blank">源码仓库</a>
+  <br><br>
+  面向科研与教学的桌面数据分析工具，数据全程本地处理，无需联网。
+</footer>
+
+</body>
+</html>
