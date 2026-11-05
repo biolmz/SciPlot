@@ -1,0 +1,14 @@
+# 打包产物与本地环境（不推送到仓库）
+installer/
+build/
+dist/
+dist_onedir/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+*.exe
+*.dmg
+*.app
+.workbuddy/

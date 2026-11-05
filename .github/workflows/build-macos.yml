@@ -1,0 +1,46 @@
+name: Build macOS DMG
+
+# 触发方式：GitHub 网页 Actions 页手动 Run workflow，或推送 v* 标签
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-14     # Apple Silicon (arm64, M 系列)
+            arch: arm64
+          - os: macos-13     # Intel (x86_64)
+            arch: x86_64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install PySide6 numpy scipy pandas matplotlib statsmodels openpyxl pyinstaller
+
+      - name: PyInstaller 打包 .app
+        run: pyinstaller --clean --noconfirm SciPlot_mac.spec
+
+      - name: 生成 DMG
+        run: |
+          hdiutil create -volname "SciPlot" -srcfolder dist/SciPlot.app -ov -format UDZO "dist/SciPlot-1.0.0-${{ matrix.arch }}.dmg"
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: SciPlot-macOS-${{ matrix.arch }}
+          path: dist/*.dmg
+          retention-days: 30
